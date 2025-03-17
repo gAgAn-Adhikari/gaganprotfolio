@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Work - Coming Soon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .coming-soon {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .coming-soon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .coming-soon-content {
+            max-width: 800px;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .coming-soon h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .coming-soon p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+        
+        .back-home {
+            margin-top: 30px;
+        }
+        
+        .back-home a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .back-home a:hover {
+            color: #4a6cf7;
+            transform: translateX(-5px);
+        }
+        
+        /* Add shooting stars for visual interest */
+        .shooting-star {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+            transform: rotate(-45deg);
+            animation: shooting 4s linear infinite;
+            z-index: 0;
+        }
+        
+        .shooting-star:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shooting-star:nth-child(2) {
+            top: 30%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+        
+        .shooting-star:nth-child(3) {
+            top: 70%;
+            left: 60%;
+            animation-delay: 3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="coming-soon">
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+        
+        <div class="coming-soon-content">
+            <h1>Works are yet to come</h1>
+            <p>Thank you for your interest in my work. I'm currently working on some exciting projects that will be showcased here soon.</p>
+            <p>See you soon!</p>
+            
+            <div class="back-home">
+                <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Create bubbles for this page too
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create new bubbles when the page loads
+            for (let i = 0; i < 5; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                // Random size between 40px and 180px
+                const size = Math.floor(Math.random() * 140) + 40;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                // Random position
+                bubble.style.left = `${Math.random() * 90}%`;
+                bubble.style.top = `${Math.random() * 90}%`;
+                
+                // Random animation duration and delay
+                bubble.style.animationDuration = `${Math.random() * 15 + 10}s`;
+                bubble.style.animationDelay = `${Math.random() * 5}s`;
+                
+                document.body.appendChild(bubble);
+            }
+            
+            // Add click event listeners to all bubbles
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('bubble')) {
+                    // Add pop animation
+                    e.target.style.animation = 'pop 0.5s ease forwards';
+                    
+                    // Remove the bubble after animation completes
+                    setTimeout(() => {
+                        e.target.remove();
+                        // Create a new bubble to replace the popped one
+                        const bubble = document.createElement('div');
+                        bubble.classList.add('bubble');
+                        
+                        const size = Math.floor(Math.random() * 140) + 40;
+                        bubble.style.width = `${size}px`;
+                        bubble.style.height = `${size}px`;
+                        
+                        bubble.style.left = `${Math.random() * 90}%`;
+                        bubble.style.top = `${Math.random() * 90}%`;
+                        
+                        bubble.style.animationDuration = `${Math.random() * 15 + 10}s`;
+                        bubble.style.animationDelay = `${Math.random() * 5}s`;
+                        
+                        document.body.appendChild(bubble);
+                    }, 500);
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
