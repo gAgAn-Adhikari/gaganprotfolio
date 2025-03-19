@@ -1,3 +1,104 @@
+.animation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.snowflake {
+    width: 15px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    animation: snowfall 8s linear infinite, twinkle 3s ease-in-out infinite;
+}
+
+.snowflake:nth-child(1) { left: 12%; animation-delay: 0s; animation-duration: 7s; }
+.snowflake:nth-child(2) { left: 28%; animation-delay: 1.2s; animation-duration: 8.5s; }
+.snowflake:nth-child(3) { left: 43%; animation-delay: 0.5s; animation-duration: 6.8s; }
+.snowflake:nth-child(4) { left: 67%; animation-delay: 1.8s; animation-duration: 7.8s; }
+.snowflake:nth-child(5) { left: 82%; animation-delay: 0.3s; animation-duration: 8.2s; }
+.snowflake:nth-child(6) { left: 18%; animation-delay: 1.5s; animation-duration: 6.5s; }
+.snowflake:nth-child(7) { left: 38%; animation-delay: 0.8s; animation-duration: 7.5s; }
+.snowflake:nth-child(8) { left: 58%; animation-delay: 2s; animation-duration: 8s; }
+.snowflake:nth-child(9) { left: 73%; animation-delay: 0.6s; animation-duration: 7.2s; }
+.snowflake:nth-child(10) { left: 92%; animation-delay: 1.4s; animation-duration: 6.2s; }
+
+@keyframes snowfall {
+    0% {
+        transform: translateY(-50px) rotate(0deg) translateX(0) scale(1);
+        opacity: 0;
+    }
+    25% {
+        transform: translateY(25vh) rotate(90deg) translateX(30px) scale(1.2);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(50vh) rotate(180deg) translateX(-20px) scale(0.8);
+        opacity: 0.9;
+    }
+    75% {
+        transform: translateY(75vh) rotate(270deg) translateX(40px) scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg) translateX(-30px) scale(0.9);
+        opacity: 0;
+    }
+}
+
+.flower {
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at 50% 50%, #ff9ecd 0%, #ff1493 50%, #ff0066 100%);
+    border-radius: 50% 0 50% 0;
+    animation: flowerfall 3s linear infinite;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+    transform-origin: center;
+}
+
+.flower:nth-child(1) { left: 8%; animation-delay: 0s; animation-duration: 6s; }
+.flower:nth-child(2) { left: 25%; animation-delay: 0.8s; animation-duration: 7s; }
+.flower:nth-child(3) { left: 45%; animation-delay: 1.2s; animation-duration: 5.5s; }
+.flower:nth-child(4) { left: 68%; animation-delay: 0.5s; animation-duration: 6.5s; }
+.flower:nth-child(5) { left: 85%; animation-delay: 1.5s; animation-duration: 7.5s; }
+.flower:nth-child(6) { left: 15%; animation-delay: 2s; animation-duration: 5s; }
+.flower:nth-child(7) { left: 35%; animation-delay: 1s; animation-duration: 6.8s; }
+.flower:nth-child(8) { left: 55%; animation-delay: 1.8s; animation-duration: 5.8s; }
+.flower:nth-child(9) { left: 75%; animation-delay: 0.3s; animation-duration: 7.2s; }
+.flower:nth-child(10) { left: 95%; animation-delay: 1.6s; animation-duration: 6.2s; }
+
+@keyframes flowerfall {
+    0% {
+        transform: translateY(-100px) rotate(0deg) scale(0.8) translateX(0);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.8;
+        transform: translateY(20vh) rotate(120deg) scale(1.2) translateX(30px);
+    }
+    40% {
+        transform: translateY(40vh) rotate(200deg) scale(0.9) translateX(-20px);
+    }
+    60% {
+        opacity: 0.9;
+        transform: translateY(60vh) rotate(280deg) scale(1.1) translateX(40px);
+    }
+    80% {
+        transform: translateY(80vh) rotate(340deg) scale(0.8) translateX(-30px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(105vh) rotate(420deg) translateX(20px);
+        opacity: 0;
+    }
+}
+
 /* Base Styles */
 :root {
     --primary-color: #4a6cf7;
@@ -1180,25 +1281,26 @@ footer {
 .bubble {
     position: fixed;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    animation: float 15s ease-in-out infinite;
-    z-index: 1000;
-    pointer-events: auto; /* Change from none to auto to make them clickable */
-    cursor: pointer; /* Add cursor pointer to indicate they're clickable */
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    backdrop-filter: blur(3px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    animation: float 20s ease-in-out infinite;
+    z-index: -1;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    opacity: 0.4;
 }
 
 /* Add pop animation */
 @keyframes pop {
     0% {
         transform: scale(1);
-        opacity: 0.7;
+        opacity: 0.4;
     }
     50% {
-        transform: scale(1.4);
-        opacity: 0.3;
+        transform: scale(1.2);
+        opacity: 0.2;
     }
     100% {
         transform: scale(0);
@@ -1303,4 +1405,167 @@ body::before {
 .header-profile-pic:hover {
     transform: scale(1.1);
     box-shadow: 0 0 15px rgba(74, 108, 247, 0.5);
-} 
+}
+
+/* Flower and Snowfall Animation */
+.flower, .snowflake {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1;
+    animation: fall 5s linear infinite;
+}
+
+.flower {
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 192, 203, 0.6);
+    border-radius: 50% 0 50% 50%;
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px rgba(255, 192, 203, 0.3);
+}
+
+.snowflake {
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        filter: brightness(100%);
+    }
+    50% {
+        filter: brightness(150%);
+    }
+}
+
+/* Generate multiple flowers and snowflakes */
+.flower:nth-child(2n) { left: 10%; animation-delay: 0.5s; }
+.flower:nth-child(3n) { left: 30%; animation-delay: 1s; }
+.flower:nth-child(4n) { left: 50%; animation-delay: 1.5s; }
+.flower:nth-child(5n) { left: 70%; animation-delay: 2s; }
+.flower:nth-child(6n) { left: 90%; animation-delay: 2.5s; }
+
+.snowflake:nth-child(2n) { left: 20%; animation-delay: 0.75s; }
+.snowflake:nth-child(3n) { left: 40%; animation-delay: 1.25s; }
+.snowflake:nth-child(4n) { left: 60%; animation-delay: 1.75s; }
+.snowflake:nth-child(5n) { left: 80%; animation-delay: 2.25s; }
+.snowflake:nth-child(6n) { left: 100%; animation-delay: 2.75s; }
+
+.bubble:nth-child(1) {
+    width: 120px;
+    height: 120px;
+    left: 5%;
+    top: 15%;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+
+.bubble:nth-child(2) {
+    width: 180px;
+    height: 180px;
+    left: 65%;
+    top: 35%;
+    animation-delay: 2s;
+    animation-duration: 25s;
+}
+
+.bubble:nth-child(3) {
+    width: 60px;
+    height: 60px;
+    left: 25%;
+    top: 55%;
+    animation-delay: 4s;
+    animation-duration: 12s;
+}
+
+.bubble:nth-child(4) {
+    width: 150px;
+    height: 150px;
+    left: 80%;
+    top: 10%;
+    animation-delay: 1s;
+    animation-duration: 20s;
+}
+
+.bubble:nth-child(5) {
+    width: 90px;
+    height: 90px;
+    left: 45%;
+    top: 75%;
+    animation-delay: 3s;
+    animation-duration: 16s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0) scale(1);
+        opacity: 0.7;
+    }
+    33% {
+        transform: translateY(-80px) rotate(120deg) scale(1.1);
+        opacity: 0.5;
+    }
+    66% {
+        transform: translateY(-160px) rotate(240deg) scale(0.9);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(0) rotate(360deg) scale(1);
+        opacity: 0.7;
+    }
+}
+
+/* Add a subtle particle effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.3"/></svg>');
+    background-size: 150px 150px;
+    z-index: -2;
+}
+
+/* Header profile picture styling */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4a6cf7;
+    box-shadow: 0 0 10px rgba(74, 108, 247, 0.3);
+    transition: all 0.3s ease;
+}
+
+.header-profile-pic:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(74, 108, 247, 0.5);
+}

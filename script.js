@@ -185,18 +185,19 @@ function createBubbles(count) {
         const bubble = document.createElement('div');
         bubble.classList.add('bubble');
         
-        // Random size between 40px and 180px
-        const size = Math.floor(Math.random() * 140) + 40;
+        // Smaller size range between 30px and 100px
+        const size = Math.floor(Math.random() * 70) + 30;
         bubble.style.width = `${size}px`;
         bubble.style.height = `${size}px`;
         
-        // Random position
-        bubble.style.left = `${Math.random() * 90}%`;
-        bubble.style.top = `${Math.random() * 90}%`;
+        // Position bubbles more towards the edges
+        const side = Math.random() < 0.5;
+        bubble.style.left = side ? `${Math.random() * 20}%` : `${80 + Math.random() * 20}%`;
+        bubble.style.top = `${Math.random() * 100}%`;
         
-        // Random animation duration and delay
-        bubble.style.animationDuration = `${Math.random() * 15 + 10}s`;
-        bubble.style.animationDelay = `${Math.random() * 5}s`;
+        // Slower animation
+        bubble.style.animationDuration = `${Math.random() * 20 + 20}s`;
+        bubble.style.animationDelay = `${Math.random() * 10}s`;
         
         document.body.appendChild(bubble);
     }
