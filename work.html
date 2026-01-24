@@ -151,6 +151,47 @@
             .pocket { width: 170px; height: 120px; }
             .blade-overlay { width: 72px; height: 72px; }
         }
+        .work-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.project-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.project-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.project-desc {
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 15px;
+}
+
+.project-link {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #007bff;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.project-link:hover {
+    background: #0056b3;
+}
+
     </style>
 </head>
 
@@ -159,7 +200,25 @@
 
         <h1 class="section-title">My Work</h1>
 
-        <div class="placeholder">Works will be added here soon.</div>
+        <div class="work-section">
+
+    <h2 class="section-title">Projects</h2>
+
+    <div class="project-card">
+        <h3 class="project-title">Rock‑Paper‑Scissors Game</h3>
+        <p class="project-desc">
+            A fun and interactive Rock‑Paper‑Scissors game built using Python (Tkinter) and also recreated in HTML + JavaScript for web play.
+        </p>
+
+        <a class="project-link" 
+           href="https://github.com/gAgAn-Adhikari/rock_paper" 
+           target="_blank">
+            <i class="fa-brands fa-github"></i> View on GitHub
+        </a>
+    </div>
+
+</div>
+
 
         <h2 class="section-title" style="margin-top:20px;">Certificates</h2>
         <div style="text-align:center; color:rgba(255,255,255,0.85); max-width:700px; margin:0 auto 10px;">
