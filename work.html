@@ -3,178 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Work - Coming Soon</title>
+    <title>My Work</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .coming-soon {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .coming-soon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
-            opacity: 0.2;
-            z-index: 0;
-        }
-        
-        .coming-soon-content {
-            max-width: 800px;
-            padding: 50px;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .coming-soon h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: #ffffff;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .coming-soon p {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.6;
-        }
-        
-        .back-home {
-            margin-top: 30px;
-        }
-        
-        .back-home a {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: #ffffff;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .back-home a:hover {
-            color: #4a6cf7;
-            transform: translateX(-5px);
-        }
-        
-        /* Add shooting stars for visual interest */
-        .shooting-star {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100px;
-            height: 1px;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-            transform: rotate(-45deg);
-            animation: shooting 4s linear infinite;
-            z-index: 0;
-        }
-        
-        .shooting-star:nth-child(1) {
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-        
-        .shooting-star:nth-child(2) {
-            top: 30%;
-            left: 80%;
-            animation-delay: 2s;
-        }
-        
-        .shooting-star:nth-child(3) {
-            top: 70%;
-            left: 60%;
-            animation-delay: 3s;
+        /* keep some of the original visual styling and add layout for projects & certificates */
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #000428 0%, #004e92 100%); color: #fff; }
+        .container { max-width: 1100px; margin: 40px auto; padding: 20px; }
+        .section-title { text-align: center; margin-bottom: 30px; font-size: 2.2rem; color: #ffffff; }
+        .projects-grid, .certificates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .project-card, .certificate-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 16px; border-radius: 12px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+        .project-card img, .certificate-card img { width: 100%; height: auto; border-radius: 8px; display: block; margin-bottom: 12px; }
+        .project-card h3, .certificate-card h3 { margin: 8px 0; color: #fff; }
+        .project-card p, .certificate-card p { color: rgba(255,255,255,0.8); font-size: 0.95rem; }
+        .back-home { margin-top: 30px; text-align: center; }
+        .back-home a { color: #fff; background: rgba(74,108,247,0.15); padding: 10px 18px; border-radius: 999px; display: inline-block; }
+        /* Small adjustments to existing shooting star & bubble classes (if present) */
+        .shooting-star { position: absolute; width: 100px; height: 1px; background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)); transform: rotate(-45deg); }
+        /* Responsive */
+        @media (max-width: 600px) {
+            .section-title { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
-    <div class="coming-soon">
-        <div class="shooting-star"></div>
-        <div class="shooting-star"></div>
-        <div class="shooting-star"></div>
-        
-        <div class="coming-soon-content">
-            <h1>Works are yet to come</h1>
-            <p>Thank you for your interest in my work. I'm currently working on some exciting projects that will be showcased here soon.</p>
-            <p>See you soon!</p>
-            
-            <div class="back-home">
-                <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    <!-- Optional shooting stars kept for visual continuity -->
+    <div class="shooting-star" style="top:10%; left:20%;"></div>
+    <div class="shooting-star" style="top:30%; left:80%;"></div>
+    <div class="shooting-star" style="top:70%; left:60%;"></div>
+
+    <div class="container">
+        <h1 class="section-title">My Work</h1>
+
+        <p style="text-align:center; color:rgba(255,255,255,0.85); max-width:800px; margin:0 auto 30px;">Below is a preview of a screenshot from my work. If you want more projects added here, tell me which files or links to include and I'll add them.</p>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="Screenshot_12-6-2025_1029_.jpeg" alt="Project screenshot">
+                <h3>Project Preview</h3>
+                <p>A snapshot demonstrating my work. Click to view full size.</p>
+                <p><a href="Screenshot_12-6-2025_1029_.jpeg" target="_blank" style="color:#4a6cf7;">Open image</a></p>
             </div>
         </div>
+
+        <h2 class="section-title" style="margin-top:40px;">Certificates</h2>
+        <p style="text-align:center; color:rgba(255,255,255,0.85); max-width:800px; margin:0 auto 20px;">Certificates I have received. Click an image to open or download it.</p>
+
+        <div class="certificates-grid">
+            <div class="certificate-card">
+                <a href="Screenshot_12-6-2025_1029_.jpeg" target="_blank">
+                    <img src="Screenshot_12-6-2025_1029_.jpeg" alt="Certificate image">
+                </a>
+                <h3>Certificate</h3>
+                <p>If you'd like a description or to add more certificates, provide the files or details and I will add them.</p>
+            </div>
+        </div>
+
+        <div class="back-home">
+            <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
     </div>
-    
+
     <script>
-        // Create bubbles for this page too
+        // Create a few subtle floating bubbles for visual interest (kept from original)
         document.addEventListener('DOMContentLoaded', function() {
-            // Create new bubbles when the page loads
             for (let i = 0; i < 5; i++) {
-                const bubble = document.createElement('div');
-                bubble.classList.add('bubble');
-                
-                // Random size between 40px and 180px
-                const size = Math.floor(Math.random() * 70) + 30;
-                bubble.style.width = `${size}px`;
-                bubble.style.height = `${size}px`;
-                
-                const side = Math.random() < 0.5;
-                bubble.style.left = side ? `${Math.random() * 20}%` : `${80 + Math.random() * 20}%`;
-                bubble.style.top = `${Math.random() * 100}%`;
-                
-                bubble.style.animationDuration = `${Math.random() * 20 + 20}s`;
-                bubble.style.animationDelay = `${Math.random() * 10}s`;
-                
-                document.body.appendChild(bubble);
+                setTimeout(() => {
+                    const bubble = document.createElement('div');
+                    bubble.classList.add('bubble');
+                    const size = Math.floor(Math.random() * 70) + 30;
+                    bubble.style.width = `${size}px`;
+                    bubble.style.height = `${size}px`;
+                    bubble.style.left = `${Math.random() * 90}%`;
+                    bubble.style.top = `${Math.random() * 90}%`;
+                    bubble.style.position = 'absolute';
+                    bubble.style.borderRadius = '50%';
+                    bubble.style.background = 'rgba(255,255,255,0.03)';
+                    bubble.style.zIndex = 0;
+                    bubble.style.animation = `float ${Math.random() * 15 + 10}s ease-in-out infinite`;
+                    document.body.appendChild(bubble);
+                }, 500 * i);
             }
-            
-            // Add click event listeners to all bubbles
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('bubble')) {
-                    // Add pop animation
-                    e.target.style.animation = 'pop 0.5s ease forwards';
-                    
-                    // Remove the bubble after animation completes
-                    setTimeout(() => {
-                        e.target.remove();
-                        // Create a new bubble to replace the popped one
-                        const bubble = document.createElement('div');
-                        bubble.classList.add('bubble');
-                        
-                        const size = Math.floor(Math.random() * 140) + 40;
-                        bubble.style.width = `${size}px`;
-                        bubble.style.height = `${size}px`;
-                        
-                        bubble.style.left = `${Math.random() * 90}%`;
-                        bubble.style.top = `${Math.random() * 90}%`;
-                        
-                        bubble.style.animationDuration = `${Math.random() * 15 + 10}s`;
-                        bubble.style.animationDelay = `${Math.random() * 5}s`;
-                        
-                        document.body.appendChild(bubble);
-                    }, 500);
-                }
-            });
         });
+
+        // Simple float animation keyframes injected at runtime
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes float { 0% { transform: translateY(0);} 50% { transform: translateY(-20px);} 100% { transform: translateY(0);} }`;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
