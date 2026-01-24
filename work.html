@@ -8,55 +8,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* keep some of the original visual styling and add layout for projects & certificates */
         body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #000428 0%, #004e92 100%); color: #fff; }
-        .container { max-width: 1100px; margin: 40px auto; padding: 20px; }
-        .section-title { text-align: center; margin-bottom: 30px; font-size: 2.2rem; color: #ffffff; }
-        .projects-grid, .certificates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-        .project-card, .certificate-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 16px; border-radius: 12px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
-        .project-card img, .certificate-card img { width: 100%; height: auto; border-radius: 8px; display: block; margin-bottom: 12px; }
-        .project-card h3, .certificate-card h3 { margin: 8px 0; color: #fff; }
-        .project-card p, .certificate-card p { color: rgba(255,255,255,0.8); font-size: 0.95rem; }
-        .back-home { margin-top: 30px; text-align: center; }
-        .back-home a { color: #fff; background: rgba(74,108,247,0.15); padding: 10px 18px; border-radius: 999px; display: inline-block; }
-        /* Small adjustments to existing shooting star & bubble classes (if present) */
-        .shooting-star { position: absolute; width: 100px; height: 1px; background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)); transform: rotate(-45deg); }
-        /* Responsive */
-        @media (max-width: 600px) {
-            .section-title { font-size: 1.6rem; }
-        }
+        .container { max-width: 900px; margin: 40px auto; padding: 20px; }
+        .section-title { text-align: center; margin-bottom: 20px; font-size: 2rem; color: #ffffff; }
+        .placeholder { text-align:center; color:rgba(255,255,255,0.85); padding:40px 20px; border: 1px dashed rgba(255,255,255,0.06); border-radius:10px; }
+        .certificates { display:flex; justify-content:center; gap:16px; margin-top:20px; }
+        .certificate-small { width:150px; background: rgba(255,255,255,0.03); padding:8px; border-radius:8px; text-align:center; border:1px solid rgba(255,255,255,0.05); }
+        .certificate-small img { width:100%; height:auto; display:block; border-radius:6px; }
+        .certificate-small h4 { font-size:0.95rem; margin:8px 0 0; color:#fff; }
+        .back-home { margin-top:30px; text-align:center; }
+        .back-home a { color: #fff; background: rgba(74,108,247,0.15); padding: 8px 14px; border-radius: 999px; display: inline-block; }
+        @media (max-width:500px){ .certificate-small{ width:110px } .section-title{ font-size:1.4rem } }
     </style>
 </head>
 <body>
-    <!-- Optional shooting stars kept for visual continuity -->
-    <div class="shooting-star" style="top:10%; left:20%;"></div>
-    <div class="shooting-star" style="top:30%; left:80%;"></div>
-    <div class="shooting-star" style="top:70%; left:60%;"></div>
-
     <div class="container">
         <h1 class="section-title">My Work</h1>
 
-        <p style="text-align:center; color:rgba(255,255,255,0.85); max-width:800px; margin:0 auto 30px;">Below is a preview of a screenshot from my work. If you want more projects added here, tell me which files or links to include and I'll add them.</p>
-
-        <div class="projects-grid">
-            <div class="project-card">
-                <img src="Screenshot_12-6-2025_1029_.jpeg" alt="Project screenshot">
-                <h3>Project Preview</h3>
-                <p>A snapshot demonstrating my work. Click to view full size.</p>
-                <p><a href="Screenshot_12-6-2025_1029_.jpeg" target="_blank" style="color:#4a6cf7;">Open image</a></p>
-            </div>
+        <div class="placeholder" aria-hidden="true">
+            Works will be added here soon.
         </div>
 
-        <h2 class="section-title" style="margin-top:40px;">Certificates</h2>
-        <p style="text-align:center; color:rgba(255,255,255,0.85); max-width:800px; margin:0 auto 20px;">Certificates I have received. Click an image to open or download it.</p>
+        <h2 class="section-title" style="margin-top:28px;">Certificates</h2>
+        <div style="text-align:center; color:rgba(255,255,255,0.85); max-width:700px; margin:0 auto 10px;">Below are a few certificates I have received. Click to open or download.</div>
 
-        <div class="certificates-grid">
-            <div class="certificate-card">
+        <div class="certificates">
+            <div class="certificate-small">
                 <a href="Screenshot_12-6-2025_1029_.jpeg" target="_blank">
-                    <img src="Screenshot_12-6-2025_1029_.jpeg" alt="Certificate image">
+                    <img src="Screenshot_12-6-2025_1029_.jpeg" alt="Certificate">
                 </a>
-                <h3>Certificate</h3>
-                <p>If you'd like a description or to add more certificates, provide the files or details and I will add them.</p>
+                <h4>Certificate</h4>
             </div>
         </div>
 
@@ -64,33 +45,5 @@
             <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
         </div>
     </div>
-
-    <script>
-        // Create a few subtle floating bubbles for visual interest (kept from original)
-        document.addEventListener('DOMContentLoaded', function() {
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    const bubble = document.createElement('div');
-                    bubble.classList.add('bubble');
-                    const size = Math.floor(Math.random() * 70) + 30;
-                    bubble.style.width = `${size}px`;
-                    bubble.style.height = `${size}px`;
-                    bubble.style.left = `${Math.random() * 90}%`;
-                    bubble.style.top = `${Math.random() * 90}%`;
-                    bubble.style.position = 'absolute';
-                    bubble.style.borderRadius = '50%';
-                    bubble.style.background = 'rgba(255,255,255,0.03)';
-                    bubble.style.zIndex = 0;
-                    bubble.style.animation = `float ${Math.random() * 15 + 10}s ease-in-out infinite`;
-                    document.body.appendChild(bubble);
-                }, 500 * i);
-            }
-        });
-
-        // Simple float animation keyframes injected at runtime
-        const style = document.createElement('style');
-        style.innerHTML = `@keyframes float { 0% { transform: translateY(0);} 50% { transform: translateY(-20px);} 100% { transform: translateY(0);} }`;
-        document.head.appendChild(style);
-    </script>
 </body>
 </html>
