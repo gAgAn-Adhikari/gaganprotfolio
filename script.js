@@ -1,247 +1,187 @@
-// DOM Elements
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
-const header = document.querySelector('header');
-const contactForm = document.getElementById('contactForm');
+(() => {
+  const body = document.body;
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav-links");
+  const themeToggle = document.querySelector(".theme-toggle");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// Toggle mobile menu
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
-});
+  // Mobile navigation
+  menuToggle?.addEventListener("click", () => {
+    const open = menuToggle.getAttribute("aria-expanded") !== "true";
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+    nav?.classList.toggle("is-open", open);
+  });
+  nav?.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+    nav.classList.remove("is-open");
+    menuToggle?.setAttribute("aria-expanded", "false");
+    menuToggle?.setAttribute("aria-label", "Open navigation");
+  }));
 
-// Close mobile menu when clicking on a nav link
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
+  // Light/dark theme, persisted locally when browser storage is available.
+  const savedTheme = (() => { try { return localStorage.getItem("gagan-portfolio-theme"); } catch (_) { return null; } })();
+  if (savedTheme === "dark") body.dataset.theme = "dark";
+  const updateThemeButton = () => {
+    const dark = body.dataset.theme === "dark";
+    themeToggle?.setAttribute("aria-pressed", String(dark));
+    themeToggle?.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+    const icon = themeToggle?.querySelector(".theme-icon");
+    if (icon) icon.textContent = dark ? "☼" : "◐";
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", dark ? "#20231e" : "#f4f1e9");
+  };
+  updateThemeButton();
+  themeToggle?.addEventListener("click", () => {
+    body.dataset.theme = body.dataset.theme === "dark" ? "light" : "dark";
+    if (body.dataset.theme === "light") delete body.dataset.theme;
+    try { localStorage.setItem("gagan-portfolio-theme", body.dataset.theme || "light"); } catch (_) {}
+    updateThemeButton();
+  });
+
+  // Gentle reveal animations; content remains visible if IntersectionObserver is unavailable.
+  const revealItems = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && !reducedMotion) {
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    }), { threshold: 0.12, rootMargin: "0px 0px -25px 0px" });
+    revealItems.forEach(item => observer.observe(item));
+  } else revealItems.forEach(item => item.classList.add("is-visible"));
+
+  // Slowly rotate the hero descriptor.
+  const rotateWord = document.querySelector("[data-rotate]");
+  if (rotateWord && !reducedMotion) {
+    const words = ["practice", "curiosity", "experiments", "possibility"];
+    let index = 0;
+    window.setInterval(() => {
+      rotateWord.classList.add("word-out");
+      window.setTimeout(() => {
+        index = (index + 1) % words.length;
+        rotateWord.textContent = words[index];
+        rotateWord.classList.remove("word-out");
+      }, 160);
+    }, 2600);
+  }
+
+  const projectInfo = {
+    "embedded": {
+      eyebrow: "PROJECT NOTE / 01 · EMBEDDED",
+      title: "Microcontroller lab work",
+      copy: "A collection of embedded-systems lab coursework and C exercises. The repository contains lab reports and project files, including material named for PWM and system tasks. It is presented as a learning collection rather than a single finished product.",
+      tags: ["C", "Microcontrollers", "PWM", "Lab reports"],
+      url: "https://github.com/gAgAn-Adhikari/LABWORKS-AND-PROJECTS/tree/main/EMBEDDED_PROJECTS"
+    },
+    "circuits": {
+      eyebrow: "PROJECT NOTE / 02 · DIGITAL CIRCUITS",
+      title: "Full adder & dice roller",
+      copy: "Digital-circuit coursework documented in your repository's digital-circuits section. The available report is titled around a full adder with modes and a dice roller.",
+      tags: ["Digital logic", "Full adder", "Dice roller"],
+      url: "https://github.com/gAgAn-Adhikari/LABWORKS-AND-PROJECTS/tree/main/DIGITAL_CIRCUITS"
+    },
+    "voting": {
+      eyebrow: "PROJECT NOTE / 03 · C",
+      title: "Voting system",
+      copy: "A terminal-based voting program with separate voter and election-commission flows. Voters use voter IDs, the election-commission side is protected by a code, and the program makes results available to users.",
+      tags: ["C", "Console application", "Menu logic"],
+      url: "https://github.com/gAgAn-Adhikari/voting-system"
+    },
+    "rock-paper": {
+      eyebrow: "PROJECT NOTE / 04 · PYTHON",
+      title: "Rock–Paper–Scissors",
+      copy: "A desktop game built with Python and Tkinter. The GUI script tracks player and computer points, displays each round's result, offers a reset button, and lets the user switch between dark and light themes.",
+      tags: ["Python", "Tkinter", "Random choice", "GUI"],
+      url: "https://github.com/gAgAn-Adhikari/rock_paper"
+    },
+    "shopping": {
+      eyebrow: "PROJECT NOTE / 05 · PYTHON",
+      title: "Shopping-list manager",
+      copy: "A small command-line program that asks for a list title, lets the user add items, prints the current list, and outputs the completed list at the end. A simple exercise in loops, lists and input validation.",
+      tags: ["Python", "Lists", "Loops", "CLI"],
+      url: "https://github.com/gAgAn-Adhikari/LABWORKS-AND-PROJECTS/tree/main/FUNDAMENTAL-PROGRAMMING/PROJECT1_SHOPPING%20CART"
+    },
+    "test-subjects": {
+      eyebrow: "PROJECT NOTE / 06 · PYTHON",
+      title: "Test-subject registry",
+      copy: "A menu-based record tool to register a subject number and a time in minutes, list stored records, and read data from or write data to a text file.",
+      tags: ["Python", "Functions", "File I/O", "Data records"],
+      url: "https://github.com/gAgAn-Adhikari/LABWORKS-AND-PROJECTS/tree/main/FUNDAMENTAL-PROGRAMMING/PROJECT2_TIME_LAP_BETWEEN_EXERCISE"
+    },
+    "social-graph": {
+      eyebrow: "PROJECT NOTE / 07 · PYTHON",
+      title: "Social graph explorer",
+      copy: "A command-line graph exercise that stores connections between suspects and accomplices, finds potential indirect accomplices from known relationships, and saves or loads the graph with Python pickle.",
+      tags: ["Python", "Graph relationships", "Sets", "Pickle"],
+      url: "https://github.com/gAgAn-Adhikari/LABWORKS-AND-PROJECTS/tree/main/FUNDAMENTAL-PROGRAMMING/PROJECT3_SOCIAL_GRAPH"
+    }
+  };
+  const peekInfo = {
+    hardware: { title: "Hardware", copy: "The physical side of a system: electronic components, boards and the microcontrollers that run embedded code.", tags: ["Electronics", "Microcontrollers", "PCB design"] },
+    software: { title: "Software", copy: "I practise programming through C and Python coursework—from command-line utilities and small games to embedded C lab work.", tags: ["C", "Python", "Problem-solving"] },
+    systems: { title: "Connected systems", copy: "My degree specialises in the Internet of Things. I'm interested in how sensors, embedded devices and software can fit together as useful systems.", tags: ["IoT", "Embedded systems", "Integration"] },
+    iot: { title: "Internet of Things", copy: "My BSc at Kristianstad University specialises in IoT. This portfolio highlights the related themes I am exploring: embedded systems, electronics, programming and connected technology.", tags: ["Degree specialisation", "Sensors", "Connected devices"] },
+    embedded: { title: "Embedded systems", copy: "I’m exploring microcontroller programming and embedded lab exercises, with a focus on understanding how code interacts with hardware.", tags: ["C", "Microcontrollers", "PWM"] },
+    electronics: { title: "Electronics & PCB design", copy: "KiCad and PCB design are among my listed technical skills. I’m also working through digital-circuit concepts such as logic gates and a full adder.", tags: ["KiCad", "PCB design", "Digital logic"] }
+  };
+
+  const dialog = document.getElementById("peek-dialog");
+  const dialogTitle = document.getElementById("dialog-title");
+  const dialogCopy = document.getElementById("dialog-copy");
+  const dialogEyebrow = document.getElementById("dialog-eyebrow");
+  const dialogTags = document.getElementById("dialog-tags");
+  const dialogLink = document.getElementById("dialog-link");
+  const closeButton = document.querySelector(".dialog-close");
+  function openDialog(item, fallbackLabel = "FIELD NOTE / QUICK PEEK") {
+    if (!dialog || !item) return;
+    dialogEyebrow.textContent = item.eyebrow || fallbackLabel;
+    dialogTitle.textContent = item.title || "A closer look";
+    dialogCopy.textContent = item.copy || "";
+    dialogTags.replaceChildren();
+    (item.tags || []).forEach(tag => {
+      const span = document.createElement("span");
+      span.textContent = tag;
+      dialogTags.appendChild(span);
     });
-});
+    if (item.url) {
+      dialogLink.href = item.url;
+      dialogLink.hidden = false;
+    } else dialogLink.hidden = true;
+    if (typeof dialog.showModal === "function") dialog.showModal();
+    else dialog.setAttribute("open", "");
+  }
+  document.querySelectorAll("[data-open-project]").forEach(button => button.addEventListener("click", () => openDialog(projectInfo[button.dataset.openProject])));
+  document.querySelectorAll("[data-peek]").forEach(button => button.addEventListener("click", () => {
+    const key = button.dataset.peek;
+    const item = peekInfo[key] || (projectInfo[key] ? { title: projectInfo[key].title, copy: projectInfo[key].copy, tags: projectInfo[key].tags, url: projectInfo[key].url } : null);
+    openDialog(item);
+  }));
+  const closeDialog = () => { if (dialog?.open) dialog.close(); };
+  closeButton?.addEventListener("click", closeDialog);
+  dialog?.addEventListener("click", event => {
+    if (event.target === dialog) closeDialog();
+  });
 
-// Header scroll effect
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
-});
-
-// Form submission
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Get form values
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
-    
-    // You would typically send this data to a server
-    // For now, we'll just log it and show a success message
-    console.log({ name, email, subject, message });
-    
-    // Show success message
-    const formGroups = document.querySelectorAll('.form-group');
-    formGroups.forEach(group => group.style.display = 'none');
-    
-    const submitBtn = document.querySelector('.contact-form button');
-    submitBtn.style.display = 'none';
-    
-    const successMessage = document.createElement('div');
-    successMessage.classList.add('success-message');
-    successMessage.innerHTML = `
-        <i class="fas fa-check-circle"></i>
-        <h3>Message Sent Successfully!</h3>
-        <p>Thank you for reaching out, ${name}. I'll get back to you soon.</p>
-    `;
-    
-    contactForm.appendChild(successMessage);
-    
-    // Reset form after 5 seconds
-    setTimeout(() => {
-        formGroups.forEach(group => group.style.display = 'block');
-        submitBtn.style.display = 'block';
-        successMessage.remove();
-        contactForm.reset();
-    }, 5000);
-});
-
-// Add smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 80, // Adjust for header height
-                behavior: 'smooth'
-            });
-        }
+  // Project filters.
+  const filterButtons = [...document.querySelectorAll("[data-filter]")];
+  const projectCards = [...document.querySelectorAll(".project-card[data-category]")];
+  const visibleCount = document.getElementById("visible-count");
+  filterButtons.forEach(button => button.addEventListener("click", () => {
+    const filter = button.dataset.filter;
+    filterButtons.forEach(item => {
+      const active = item === button;
+      item.classList.toggle("is-active", active);
+      item.setAttribute("aria-pressed", String(active));
     });
-});
-
-// Add animation to elements when they come into view
-const animateOnScroll = () => {
-    const elements = document.querySelectorAll('.timeline-item, .skill-category, .about-content');
-    
-    elements.forEach(element => {
-        const elementPosition = element.getBoundingClientRect().top;
-        const screenPosition = window.innerHeight / 1.2;
-        
-        if (elementPosition < screenPosition) {
-            element.classList.add('animate');
-        }
+    let count = 0;
+    projectCards.forEach(card => {
+      const categories = (card.dataset.category || "").split(/\s+/);
+      const visible = filter === "all" || categories.includes(filter);
+      card.hidden = !visible;
+      if (visible) count++;
     });
-};
+    if (visibleCount) visibleCount.textContent = String(count).padStart(2, "0");
+  }));
 
-// Run animation check on scroll
-window.addEventListener('scroll', animateOnScroll);
-
-// Run animation check on page load
-window.addEventListener('load', animateOnScroll);
-
-// Add CSS for the animations
-const style = document.createElement('style');
-style.textContent = `
-    .timeline-item, .skill-category, .about-content {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    
-    .timeline-item.animate, .skill-category.animate, .about-content.animate {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    .timeline-item:nth-child(2) {
-        transition-delay: 0.2s;
-    }
-    
-    .timeline-item:nth-child(3) {
-        transition-delay: 0.4s;
-    }
-    
-    .skill-category:nth-child(2) {
-        transition-delay: 0.2s;
-    }
-    
-    .skill-category:nth-child(3) {
-        transition-delay: 0.4s;
-    }
-    
-    .success-message {
-        text-align: center;
-        padding: 30px;
-        color: var(--success-color);
-    }
-    
-    .success-message i {
-        font-size: 3rem;
-        margin-bottom: 15px;
-    }
-`;
-
-document.head.appendChild(style);
-
-// Bubble pop effect
-document.addEventListener('DOMContentLoaded', function() {
-    // Create new bubbles when the page loads
-    createBubbles(5);
-    
-    // Add click event listeners to all bubbles
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('bubble')) {
-            popBubble(e.target);
-        }
-    });
-});
-
-// Function to pop a bubble
-function popBubble(bubble) {
-    // Play pop sound (optional)
-    const popSound = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU9vT18A'); // You can replace this with a real sound file
-    popSound.volume = 0.2;
-    popSound.play().catch(e => console.log('Audio play failed:', e));
-    
-    // Add pop animation
-    bubble.style.animation = 'pop 0.5s ease forwards';
-    
-    // Remove the bubble after animation completes
-    setTimeout(() => {
-        bubble.remove();
-        // Create a new bubble to replace the popped one
-        createBubbles(1);
-    }, 500);
-}
-
-// Function to create new bubbles
-function createBubbles(count) {
-    for (let i = 0; i < count; i++) {
-        const bubble = document.createElement('div');
-        bubble.classList.add('bubble');
-        
-        // Smaller size range between 30px and 100px
-        const size = Math.floor(Math.random() * 70) + 30;
-        bubble.style.width = `${size}px`;
-        bubble.style.height = `${size}px`;
-        
-        // Position bubbles more towards the edges
-        const side = Math.random() < 0.5;
-        bubble.style.left = side ? `${Math.random() * 20}%` : `${80 + Math.random() * 20}%`;
-        bubble.style.top = `${Math.random() * 100}%`;
-        
-        // Slower animation
-        bubble.style.animationDuration = `${Math.random() * 20 + 20}s`;
-        bubble.style.animationDelay = `${Math.random() * 10}s`;
-        
-        document.body.appendChild(bubble);
-    }
-}
-
-// Enhanced Header Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const header = document.querySelector('header');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    const sections = document.querySelectorAll('section');
-    
-    // Add scrolled class to header when scrolling
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-        
-        // Highlight active section in navigation
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (pageYOffset >= (sectionTop - 200)) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').substring(1) === current) {
-                link.classList.add('active');
-            }
-        });
-    });
-    
-    // Add hover effect to logo
-    const logo = document.querySelector('.logo a');
-    logo.addEventListener('mouseover', function() {
-        this.style.textShadow = '0 0 10px rgba(74, 108, 247, 0.5)';
-    });
-    
-    logo.addEventListener('mouseout', function() {
-        this.style.textShadow = 'none';
-    });
-});
+  const year = document.getElementById("year");
+  if (year) year.textContent = new Date().getFullYear();
+})();
